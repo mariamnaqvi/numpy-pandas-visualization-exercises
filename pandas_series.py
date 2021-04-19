@@ -1,3 +1,6 @@
+import numpy as numpy
+import pandas as pd
+
 #  Use pandas to create a Series named fruits from the following list:
     ["kiwi", "mango", "strawberry", "pineapple", "gala apple", "honeycrisp apple", "tomato", "watermelon", "honeydew", "kiwi", "kiwi", "kiwi", "mango", "blueberry", "blackberry", "gooseberry", "papaya"]
 
@@ -46,9 +49,21 @@ fruits.describe()
 
 # 7. Run the code necessary to produce only the unique string values from fruits.
 
+fruits.unique()
+
 # 8. Determine how many times each unique string value occurs in fruits.
+
+fruits.value_counts()
 
 # 9. Determine the string value that occurs most frequently in fruits.
 
+fruits.mode()
+
+# or
+
+fruits.value_counts()[:1].sort_values(ascending=False)
+
 # 10. Determine the string value that occurs least frequently in fruits.
 
+
+fruits.value_counts()[:-1].sort_values(ascending=True)
