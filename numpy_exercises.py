@@ -4,23 +4,48 @@ a = np.array([4, 10, 12, 23, -2, -1, 0, 0, 0, -6, 3, -7])
 
 # 1. How many negative numbers are there? 
 
-count_negatives = len(a [a < 0 ])  
+count_negatives = len(a [a < 0 ]) # only works for 1d arrays 
 print (count_negatives)
+
+a[a < 0].shape[0] # get the first index
 
 # 2. How many positive numbers are there?
 
 count_positives = len(a [a > 0 ])
 print (count_positives)
 
+# or
+a[a > 0].shape[0]
+
 # 3. How many even positive numbers are there?
 
-count_even_pos = len([n for n in a if n > 0 and n % 2 ==0])
+count_even_pos = len([n for n in a if n > 0 and n % 2 ==0]) # only works for 1d arrays
 print (count_even_pos)
+
+#or
+
+'# of even positives in a: %d' % a[(a > 0) & (a % 2 == 0)].shape[0]
+
+# or..
+
+positive_mask = a > 0
+even_mask = a % 2 == 0
+a[positive_mask & even_mask].shape[0]
+
+# Or...
+positives = a[a > 0]
+positive_evens = positives[positives % 2 == 0]
+
 
 # 4. If you were to add 3 to each data point, how many positive numbers would there be?
 
 count_pos_add3 = len([n for n in a if n + 3 > 0])
 print (count_pos_add3) 
+
+#or 
+
+add_three = a + 3
+'# of positives after adding 3: %d' % add_three[add_three > 0].shape[0]
 
 # 5. If you squared each number, what would the new mean and standard deviation be?
 
@@ -31,6 +56,11 @@ print (mean_of_squared)
 std_of_squared = round(np.std(squared_list), 3)
 print (std_of_squared)
 
+# or..
+
+a_squared = a ** 2
+'mean: %.4f std: %.4f' % (a_squared.mean(), a_squared.std())
+
 
 # 6. A common statistical operation on a dataset is centering. This means to adjust the data such that the mean of the data is 0. 
 # This is done by subtracting the mean from each data point. Center the data set. See this link for more on centering.
@@ -40,9 +70,8 @@ print (centered_data)
 
 # 7. Calculate the z-score for each data point. 
 
-z_score =  centered_data/std
+z_score =  (centered_data)/a.std()
 print (z_score)
-
 
 # ----------------------------------------------------------------------------------
 
@@ -72,15 +101,29 @@ print (max_of_a)
 mean_of_a = np.mean(a)
 print (mean_of_a)
 
+# or..
+
+mean_of_a = sum(a) / len(a)
+
 # Exercise 5 - Make a variable named product_of_a to hold the product of multiplying all the numbers in the above list together
 
 product_of_a = np.product(a)
 print (product_of_a)
 
+# or
+
+product_of_a = 1
+for n in a:
+    product_of_a *= n
+
 # Exercise 6 - Make a variable named squares_of_a. It should hold each number in a squared like [1, 4, 9, 16, 25...]
 
 squares_of_a = np.square(a)
 print (squares_of_a)
+
+# or
+
+squares_of_a = [n**2 for n in a]
 
 # Exercise 7 - Make a variable named odds_in_a. It should hold only the odd numbers
 
@@ -88,6 +131,10 @@ a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 odds_in_a = a[a % 2 == 1]
 print (odds_in_a)
+
+#or
+
+odds_in_a = [n for n in a if n % 2 == 1]
 
 # Exercise 8 - Make a variable named evens_in_a. It should hold only the evens.
 
@@ -102,7 +149,6 @@ b = [
     [3, 4, 5],
     [6, 7, 8]
 ]
-
 
 # Exercise 1 - refactor the following to use numpy. Use sum_of_b as the variable. **Hint, you'll first need to make sure that 
 # the "b" variable is a numpy array**
@@ -144,6 +190,10 @@ for row in b:
 # with numpy
 product_of_b = np.product(b)
 print (product_of_b)
+
+#or
+
+product_of_b = b.prod()
 
 # Exercise 6 - refactor the following to use numpy to find the list of squares 
 squares_of_b = []
@@ -188,6 +238,8 @@ np.transpose(b)
 # Exercise 11 - reshape the array b to be a single list of 6 numbers. (1 x 6)
 
 np.reshape(b, (1,6))
+
+# -1 says idk what num of columns will be but i want 6 rows
 
 # Exercise 12 - reshape the array b to be a list of 6 lists, each containing only 1 number (6 x 1)
 
@@ -253,6 +305,12 @@ np.sum(trans_c)
 trans_c = c * np.transpose(c)
 np.product(trans_c)
 
+#or
+
+(c * c.transpose()).prod()
+
+# ----------------------------------------------------------------------------------
+
 ## Setup 4
 d = [
     [90, 30, 45, 0, 120, 180],
@@ -293,6 +351,10 @@ print (uniques_d)
 # Exercise 7 - Determine how many unique numbers there are in d.
 
 len(uniques_d)
+
+#or
+
+np.unique(d).shape[0]
 
 # Exercise 8 - Print out the shape of d.
 
