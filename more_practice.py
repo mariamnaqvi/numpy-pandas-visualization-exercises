@@ -24,10 +24,47 @@ fruits.str.title()
 # Exercise 3 - Use a list comprehension to make a variable named 
 # fruits_with_more_than_two_vowels. Hint: You'll need a way to check if something is a vowel.
 
-fruits_with_more_than_two_vowels = fruits.str.count(r'[aeiou]')
+fruits_with_more_than_two_vowels = fruits.str.count('[aeiou]')
 
 # Exercise 4 - make a variable named fruits_with_only_two_vowels. The result should be ['mango', 'kiwi', 'strawberry']
 
 result = fruits.map(lambda c: sum([Counter(c.lower()).get(i, 0) 
                                    for i in list('aeiou')]) == 2)
+
+fruits[result]
+
+# Exercise 5 - make a list that contains each fruit with more than 5 characters
+
+# Vanilla Python method
+def fruits_with_5 (fruits):
+    new_list = []
+    for fruit in fruits:
+        if len(fruit) > 5:
+            new_list.append(fruit)
+    return new_list
+
+#list comp method   
+fruits_morethan5 = [f for f in fruits if len(f) > 5]
+
+#using pandas
+
+fruits_morethan5 = fruits[fruits.apply(lambda x: len(str(x)) > 5)]
+
+# Exercise 6 - make a list that contains each fruit with exactly 5 characters
+
+fruits_with5 = fruits[fruits.apply(lambda fruit: len(str(fruit)) == 5)]
+
+# Exercise 7 - Make a list that contains fruits that have less than 5 characters
+
+fruits_lessthan5 = fruits[fruits.apply(lambda fruit: len(str(fruit)) < 5)]
+
+# Exercise 8 - Make a list containing the number of characters in each fruit. Output would be [5, 4, 10, etc... ]
+
+char_infruit = fruits.apply(lambda fruit: len(fruit))
+
+# Exercise 9 - Make a variable named fruits_with_letter_a that contains a list of only the fruits that contain the letter "a"
+
+fruits_with_letter_a
+
+
 
