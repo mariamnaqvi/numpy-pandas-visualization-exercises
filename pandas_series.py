@@ -111,8 +111,27 @@ def count_vowels(fruit):
 
 vowels_count = fruits[fruits.apply(count_vowels)]
 
+# or alt solution 
+
+fruits.str.count('a|e|i|o|u')
+
+# to to group strings by the number of occurrences of each vowel
+
+fruits.str.count('[aeiou]').value_counts()
+
 # 4. Write the code to get the longest string value from fruits.
 
+# to get the length of all fruits in the series
+
+lengths = fruits.apply(lambda f: len(f))
+
+# gives index of longest string
+lengths.idxmax()
+
+# to get the name of the fruit with the longest length
+fruits[lengths.idxmax()]
+
+# alt solution
 longest = fruits.apply(len).nlargest(1)
 fruits[longest.idxmax()]
 
@@ -157,15 +176,21 @@ letters.mode() # returns y
 
 # 2. Which letter occurs the Least frequently?
 
+#value_counts gives count of each letter
 letters.value_counts().idxmin() # returns l
 
 #  3. How many vowels are in the Series?
 
 letters.str.count('[aeiou]').sum() # .count tells you which index is a vowel, .sum adds up the vowels
+# returns 34 vowels
 
 # 4. How many consonants are in the Series?
 
 letters.str.count('[bcdfghjklmnpqrstvwxyz]').sum()
+# returns 166 consonants
+
+# or use ~ to check letters not in vowels
+(~letters.str.lower().isin(['a', 'e', 'i', 'o', 'u'])).sum()
 
 # 5. Create a Series that has all of the same letters but uppercased.
 
@@ -173,11 +198,13 @@ upper_series = letters.str.upper()
 
 # 6. Create a bar plot of the frequencies of the 6 most commonly occuring letters.
 
+letters.value_counts().head(6) # gives the 6 most commonly occuring letters
+
 fig = upper_series.value_counts().head(6).plot.bar(color = 'blue', width =0.8)
 plt.title('Letter frequencies')
 plt.xticks(rotation = 0)
-plt.xlabel('x')
-plt.ylabel('y')
+plt.xlabel('letters')
+plt.ylabel('frequency')
 plt.show()
 
 # ---------------------------------------------------------
