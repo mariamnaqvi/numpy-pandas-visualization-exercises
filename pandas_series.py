@@ -115,6 +115,39 @@ vowels_count = fruits[fruits.apply(count_vowels)]
 
 fruits.str.count('a|e|i|o|u')
 
+# to get a table like below that gives the fruit name with its corresponding vowel count
+
+new_df = fruits.reset_index() # add another index col
+
+new_df['vowel_count'] = fruits.str.count('a|e|i|o|u') # add a new vowel count col and count vowels in each fruit
+
+new_df2 = new_df.drop(columns = ['index']) # drop the index col
+
+new_df3 = new_df2.rename(columns = {0: 'fruit name'}) # rename the 0 col to fruit name
+
+'''
+returns 
+
+    fruit name	    vowel_count
+0	kiwi	            2
+1	mango	            2
+2	strawberry	        2
+3	pineapple	        4
+4	gala apple	        4
+5	honeycrisp apple	5
+6	tomato	            3
+7	watermelon  	    4
+8	honeydew	        3
+9	kiwi	            2
+10	kiwi	            2
+11	kiwi	            2
+12	mango	            2
+13	blueberry	        3
+14	blackberry	        2
+15	gooseberry	        4
+16	papaya	            3
+'''
+
 # to to group strings by the number of occurrences of each vowel
 
 fruits.str.count('[aeiou]').value_counts()
