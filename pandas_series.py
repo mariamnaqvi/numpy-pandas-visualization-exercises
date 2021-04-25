@@ -192,6 +192,12 @@ fruits[fruits.str.contains('apple')]
 
 fruits[fruits.str.lower().str.count(r'[aeiou]').max()]
 
+# alt 1
+fruits[fruits.str.count('[aeiou]').max()]
+
+# alt 2
+fruits[fruits.str.count('[aeiou]').idxmax()]
+
 # ---------------------------------------------------------
 
 # Exercises Part III 
@@ -216,6 +222,10 @@ letters.value_counts().idxmin() # returns l
 
 letters.str.count('[aeiou]').sum() # .count tells you which index is a vowel, .sum adds up the vowels
 # returns 34 vowels
+
+# alt 1
+letters.str.count('[aeiou]') # returns boolean values where 1 is True for vowel
+letters.str.count('[aeiou]').value_counts() # returns the count of 0 and 1 where 1 is true
 
 # 4. How many consonants are in the Series?
 
@@ -307,6 +317,21 @@ exam_scores.plot.hist(color = 'blue', ec = 'black', alpha = .5)
 
 plt.title('Exam Scores Distribution')
 plt.xlabel('Scores')
+plt.show()
+
+# alt method
+# sort the exam scores according to their frequencies
+exam_scores.value_counts()
+
+# sorts the index which is the exam score
+exam_scores.value_counts().sort_index()
+
+# plot into a histogram >> the grades will be in ascending order due to sorting above
+exam_scores.value_counts().sort_index().plot(kind = 'bar', color = 'lime', ec = 'black', alpha = 0.4, rot = 0)
+
+plt.title('Exam Scores Distribution')
+plt.xlabel('Score')
+plt.ylabel('Number of Students')
 plt.show()
 
 # 4. Write the code necessary to implement a curve for your exam_grades Series and save this as curved_grades. 
