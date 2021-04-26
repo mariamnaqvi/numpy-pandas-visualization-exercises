@@ -165,56 +165,89 @@ even_numbers = numbers[numbers.apply(lambda n: n % 2 == 0)]
 
 # Exercise 11 - Make a variable named odd_numbers that holds only the odd numbers
 # using vanilla python
+odd_numbers = []
+for number in numbers:
+    if number % 2 == 1:
+        odd_numbers.append(number)
 
 # using list comprehension
+odd_numbers = [number for number in numbers if number % 2 == 1]
 
 #using pandas
 odd_numbers = numbers[numbers.apply(lambda n: n % 2 == 1)]
 
 # Exercise 12 - Make a variable named positive_numbers that holds only the positive numbers
 # using vanilla python
+positive_numbers = []
+for number in numbers:
+    if number > 0:
+        positive_numbers.append(number)
 
 # using list comprehension
+positive_numbers = [number for number in numbers if number > 0]
 
 #using pandas
 positive_numbers = numbers[numbers.apply(lambda n: n > 0)]
 
 # Exercise 13 - Make a variable named negative_numbers that holds only the negative numbers
 # using vanilla python
+negative_numbers = []
+for number in numbers:
+    if number < 0:
+        negative_numbers.append(number)
 
 # using list comprehension
+negative_numbers = [number for number in numbers if number < 0]
 
 #using pandas
 negative_numbers = numbers[numbers.apply(lambda n: n < 0)]
 
 # Exercise 14 - use a list comprehension w/ a conditional in order to produce a list of numbers with 2 or more numerals
 # using vanilla python
+two_or_more = []
+for number in numbers:
+    if len(str(abs(number)))>=2:
+        two_or_more.append(number)
 
 # using list comprehension
+two_or_more = [number for number in numbers if len(str(abs(number))) >= 2]
 
 #using pandas
 two_ormore_numerals = numbers[numbers.apply(lambda n: len(str(abs((n)))) >= 2)]
 
 # Exercise 15 - Make a variable named numbers_squared that contains the numbers list with each element squared. Output is [4, 9, 16, etc...]
 # using vanilla python
+numbers_squared = []
+for number in numbers:
+    numbers_squared.append(number * number)
 
 # using list comprehension
+numbers_squared = [number * number for number in numbers]
 
 #using pandas
 numbers_squared = numbers ** 2
 
 # Exercise 16 - Make a variable named odd_negative_numbers that contains only the numbers that are both odd and negative.
 # using vanilla python
+odd_negative_numbers = []
+for number in numbers:
+    if number < 0 and (number % 2 == 1):
+        odd_negative_numbers.append(number)
 
 # using list comprehension
+odd_negative_numbers = [number for number in numbers if number < 0 and (number % 2 == 1)]
 
 #using pandas
 odd_negative_numbers = numbers[numbers.apply(lambda n: (n < 0) & (n % 2 == 1))]
 
 # Exercise 17 - Make a variable named numbers_plus_5. In it, return a list containing each number plus five. 
 # using vanilla python
+numbers_plus_5 = []
+for number in numbers:
+    numbers_plus_5.append(number + 5)
 
 # using list comprehension
+numbers_plus_5 = [number + 5 for number in numbers]
 
 #using pandas
 numbers_plus_5 = numbers + 5
